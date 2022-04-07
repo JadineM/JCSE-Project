@@ -13,7 +13,6 @@ bcrypt = Bcrypt(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SECRET_KEY'] = 'secretkey'
 
-
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login" 
@@ -25,7 +24,6 @@ command1 = """CREATE TABLE IF NOT EXISTS forms(form_id INTEGER PRIMARY KEY, firs
 
 cursor.execute(command1)
 #cursor.execute('DROP TABLE forms')
-
 
 
 @login_manager.user_loader
@@ -86,8 +84,7 @@ class ApplicationForm(FlaskForm):
         existing_user_email = Forms.query.filter_by(email=email.data).first()
         if existing_user_email:
             raise ValidationError("That email already exists. You have already applied")  
-
-    
+ 
 
 @app.before_first_request
 def create_tables():
@@ -96,7 +93,6 @@ def create_tables():
 @app.route('/')
 def home():
     return render_template('home.html')
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
